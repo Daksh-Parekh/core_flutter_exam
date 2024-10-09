@@ -15,13 +15,30 @@ class Detailpage extends StatefulWidget {
 }
 
 class _DetailpageState extends State<Detailpage> {
-  List<Map> allDetails = [{}];
+  List<Map<String, dynamic>> allDetails = [{}];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail Page"),
+        backgroundColor: Colors.cyanAccent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 26,
+          ),
+        ),
+        title: Text(
+          "Detail Page",
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -32,10 +49,10 @@ class _DetailpageState extends State<Detailpage> {
                 children: allDetails
                     .map(
                       (e) => Container(
-                        height: size.height * 0.6,
+                        height: size.height * 0.54,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: Colors.cyanAccent.withAlpha(50),
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
                           ),
@@ -50,11 +67,14 @@ class _DetailpageState extends State<Detailpage> {
                               children: [
                                 CircleAvatar(
                                   radius: 80,
+                                  backgroundColor: Colors.indigo.shade500,
                                   foregroundImage: e['image'] != null
                                       ? FileImage(e['image']!)
                                       : null,
                                 ),
                                 FloatingActionButton.small(
+                                  backgroundColor: Colors.white,
+                                  splashColor: Colors.cyan,
                                   onPressed: () async {
                                     ImagePicker picker = ImagePicker();
                                     XFile? file = await picker.pickImage(
@@ -67,7 +87,10 @@ class _DetailpageState extends State<Detailpage> {
                                       log("Image not received");
                                     }
                                   },
-                                  child: Icon(Icons.add),
+                                  child: const Icon(
+                                    Icons.add_a_photo_rounded,
+                                    size: 30,
+                                  ),
                                 )
                               ],
                             ),
@@ -77,7 +100,7 @@ class _DetailpageState extends State<Detailpage> {
                               onChanged: (val) {
                                 e['id'] = val;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: "Student ID",
                                 labelText: "Enter Student ID",
@@ -88,7 +111,7 @@ class _DetailpageState extends State<Detailpage> {
                               onChanged: (val) {
                                 e['name'] = val;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: "Student Name",
                                 labelText: "Enter Student Name",
@@ -121,9 +144,13 @@ class _DetailpageState extends State<Detailpage> {
                     },
                     child: Text(
                       "ADD",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    color: Colors.blue,
+                    color: Colors.indigo.shade400,
                   ),
                   10.w,
                   MaterialButton(
@@ -132,9 +159,13 @@ class _DetailpageState extends State<Detailpage> {
                     },
                     child: Text(
                       "Save",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    color: Colors.blue,
+                    color: Colors.indigo.shade400,
                   ),
                 ],
               ),

@@ -17,13 +17,24 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("HomePage"),
+        backgroundColor: Colors.cyanAccent,
+        title: Text(
+          "HomePage",
+          style: TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {
               setState(() {});
             },
-            icon: Icon(Icons.refresh),
+            icon: Icon(
+              Icons.refresh,
+              size: 38,
+            ),
           ),
         ],
       ),
@@ -33,81 +44,134 @@ class _HomePageState extends State<HomePage> {
           children: Globals.StudentDetail.map(
             (e) => GestureDetector(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text("Update "),
-                    actions: [
-                      TextFormField(
-                        initialValue: e['id'],
-                        onChanged: (value) {
-                          e['id'] = value;
-                        },
-                        decoration: InputDecoration(
-                          labelText: "Id",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      10.h,
-                      TextFormField(
-                        initialValue: e['name'],
-                        onChanged: (value) {
-                          e['name'] = value;
-                        },
-                        decoration: InputDecoration(
-                          labelText: "Name",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      10.h,
-                      TextFormField(
-                        initialValue: e['course'],
-                        onChanged: (value) {
-                          e['course'] = value;
-                        },
-                        decoration: InputDecoration(
-                          labelText: "course",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                Navigator.pushNamed(context, AppRoutes.detailPage);
               },
               child: Container(
-                height: size.height * 0.15,
+                height: size.height * 0.16,
+                margin: EdgeInsets.only(bottom: 12),
                 decoration: BoxDecoration(
-                  color: Colors.amber.shade100,
+                  color: Colors.cyan.shade200,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: ListTile(
-                  leading: Container(
-                    height: size.height * 0.23,
-                    width: size.width * 0.23,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: FileImage(e['image']),
-                        fit: BoxFit.cover,
-                        alignment: Alignment.center,
-                      ),
-                      shape: BoxShape.circle,
+                  leading: CircleAvatar(
+                    radius: 30,
+                    foregroundImage: FileImage(e['image']),
+                  ),
+                  title: Text(
+                    "${e['id']}",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  title: Text("${e['id']}  ${e['name']}"),
-                  subtitle: Text(e['course']),
-                  trailing: Column(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.update_rounded),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          Globals.StudentDetail.remove(e);
-                        },
-                        icon: Icon(Icons.delete_forever),
-                      ),
-                    ],
+                  subtitle: Text(
+                    "${e['name']}\t\t\t${e['course']}",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  isThreeLine: true,
+                  trailing: IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          scrollable: true,
+                          backgroundColor: Colors.cyan.shade50,
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Student Details"),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                icon: Icon(Icons.close_rounded),
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            TextFormField(
+                              initialValue: e['id'],
+                              onChanged: (value) {
+                                e['id'] = value;
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Id",
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            10.h,
+                            TextFormField(
+                              initialValue: e['name'],
+                              onChanged: (value) {
+                                e['name'] = value;
+                              },
+                              decoration: InputDecoration(
+                                labelText: "Name",
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            10.h,
+                            TextFormField(
+                              initialValue: e['course'],
+                              onChanged: (value) {
+                                e['course'] = value;
+                              },
+                              decoration: InputDecoration(
+                                labelText: "course",
+                                border: OutlineInputBorder(),
+                              ),
+                            ),
+                            10.h,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                MaterialButton(
+                                  color: Colors.blue,
+                                  onPressed: () {
+                                    Globals.StudentDetail.remove(e);
+                                    setState(
+                                      () {
+                                        Navigator.pop(context);
+                                      },
+                                    );
+                                  },
+                                  child: Text(
+                                    "Delete",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                                MaterialButton(
+                                  color: Colors.blue,
+                                  onPressed: () {
+                                    Globals.StudentDetail = e['id'];
+                                    Globals.StudentDetail = e['name'];
+                                    Globals.StudentDetail = e['course'];
+                                  },
+                                  child: Text(
+                                    "Save",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    icon: Icon(Icons.edit),
                   ),
                 ),
               ),
@@ -119,8 +183,17 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.pushNamed(context, AppRoutes.detailPage);
         },
+        backgroundColor: Colors.cyanAccent,
         icon: Icon(Icons.add),
-        label: Text("Add Student"),
+        label: Text(
+          "Add Student",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.black,
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
