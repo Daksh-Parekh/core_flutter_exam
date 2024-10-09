@@ -24,7 +24,7 @@ The **Student Data Management App** is a Flutter application built to help users
 To run this project locally, follow these steps:
 
 ### Clone the Repository
-git clone https://github.com/your-username/student-data-management-app.git
+git clone https://github.com/Daksh-Parekh/core_flutter_exam
 cd student-data-management-app
 
 ### Install Dependencies
@@ -44,9 +44,14 @@ Once the app is up and running:
 ## 📷 Screenshots
 Add relevant screenshots here to showcase your app in action.
 
-- **Home Screen**
-- **Add Student Screen**
-- **Update/Delete Dialog**
+
+<img src="https://github.com/user-attachments/assets/5e7887af-4534-4f7e-bc86-d2218f818434" width="300px">
+<img src="https://github.com/user-attachments/assets/58c9eb69-df4d-418d-afec-2934b14ffb24" width="300px">
+<img src="https://github.com/user-attachments/assets/4c127647-c4f2-44ee-bdd4-4667692c0e00" width="300px">
+<img src="https://github.com/user-attachments/assets/dfb1fdca-3e56-46b4-b994-7f9f3d26b592" width="300px">
+<img src="https://github.com/user-attachments/assets/1d6e4ba2-31ce-4082-8444-28a67ff2cb3b" width="300px">
+
+
 
 ## 🤝 Contributing
 Contributions are welcome! If you have any suggestions or improvements, please follow these steps:
